@@ -1,0 +1,19 @@
+# API Discovery & Classification Plugin - Dependencies
+#
+# Core (stdlib only - no external deps required for basic usage)
+# The following are optional dependencies for enhanced functionality:
+
+# YAML parsing (for OpenAPI YAML specs)
+pyyaml>=6.0
+
+# HTTP requests (optional, stdlib urllib is used by default)
+# requests>=2.31.0
+
+# XML parsing for WSDL (optional, stdlib xml.etree is used by default)
+# lxml>=4.9.0
+
+# Async HTTP for better performance (optional)
+# aiohttp>=3.9.0
+
+# Rich console output (optional)
+# rich>=13.0.0

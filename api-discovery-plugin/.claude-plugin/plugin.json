@@ -1,0 +1,146 @@
+{
+  "name": "api-discovery",
+  "version": "1.0.0",
+  "description": "API Discovery & Classification Plugin - Discovers, classifies, and inventories APIs from multiple sources including catalogs, repositories, logs, and network scanning.",
+  "author": "Itau Corporate Banking",
+  "license": "Apache-2.0",
+  "commands": [
+    {
+      "name": "discover-apis",
+      "description": "Discover and classify APIs from multiple sources",
+      "file": "../commands/discover-apis.md",
+      "arguments": [
+        {
+          "name": "--input",
+          "description": "Path to CSV/JSON file with API list",
+          "required": false
+        },
+        {
+          "name": "--sources",
+          "description": "Comma-separated discovery sources: catalog,git,logs,network",
+          "required": false,
+          "default": "catalog"
+        },
+        {
+          "name": "--mode",
+          "description": "Discovery mode: passive, active, hybrid",
+          "required": false,
+          "default": "passive"
+        },
+        {
+          "name": "--catalog-url",
+          "description": "URL of API catalog/gateway",
+          "required": false
+        },
+        {
+          "name": "--git-org",
+          "description": "GitHub/GitLab organization to scan",
+          "required": false
+        },
+        {
+          "name": "--log-dir",
+          "description": "Directory containing access logs",
+          "required": false
+        },
+        {
+          "name": "--network-range",
+          "description": "CIDR range for network discovery (active mode only)",
+          "required": false
+        },
+        {
+          "name": "--ports",
+          "description": "Comma-separated ports to scan (active mode only)",
+          "required": false,
+          "default": "80,443,8080,3000,50051"
+        },
+        {
+          "name": "--output",
+          "description": "Output directory for generated files",
+          "required": false,
+          "default": "./output"
+        },
+        {
+          "name": "--workers",
+          "description": "Number of parallel workers",
+          "required": false,
+          "default": "20"
+        },
+        {
+          "name": "--timeout",
+          "description": "Timeout per API in seconds",
+          "required": false,
+          "default": "30"
+        }
+      ]
+    }
+  ],
+  "agents": [
+    {
+      "name": "api-classifier",
+      "description": "Classifies API type (REST, GraphQL, SOAP, gRPC)",
+      "directory": "../agents/api-classifier"
+    },
+    {
+      "name": "spec-detector",
+      "description": "Detects API specifications (OpenAPI, WSDL, GraphQL schema)",
+      "directory": "../agents/spec-detector"
+    },
+    {
+      "name": "tech-analyzer",
+      "description": "Identifies technology stack (language, framework, infrastructure)",
+      "directory": "../agents/tech-analyzer"
+    },
+    {
+      "name": "ownership-finder",
+      "description": "Discovers API ownership (squad, department, contact)",
+      "directory": "../agents/ownership-finder"
+    },
+    {
+      "name": "criticality-scorer",
+      "description": "Calculates API criticality score (0-100)",
+      "directory": "../agents/criticality-scorer"
+    }
+  ],
+  "skills": [
+    {
+      "name": "api-pattern-recognition",
+      "description": "Recognizes API patterns from URLs, headers, and responses",
+      "directory": "../skills/api-pattern-recognition"
+    },
+    {
+      "name": "openapi-detector",
+      "description": "Detects and parses OpenAPI/Swagger specifications",
+      "directory": "../skills/openapi-detector"
+    },
+    {
+      "name": "graphql-introspection",
+      "description": "Performs GraphQL introspection and schema analysis",
+      "directory": "../skills/graphql-introspection"
+    },
+    {
+      "name": "soap-wsdl-parser",
+      "description": "Parses WSDL definitions and SOAP endpoints",
+      "directory": "../skills/soap-wsdl-parser"
+    },
+    {
+      "name": "framework-fingerprinting",
+      "description": "Identifies frameworks and technologies from HTTP headers",
+      "directory": "../skills/framework-fingerprinting"
+    }
+  ],
+  "scripts": {
+    "multi_source_scanner": "scripts/multi_source_scanner.py",
+    "active_probe": "scripts/active_probe.py",
+    "passive_discovery": "scripts/passive_discovery.py",
+    "inventory_generator": "scripts/inventory_generator.py"
+  },
+  "settings": {
+    "max_workers": 20,
+    "timeout_per_api": 30,
+    "max_retries": 3,
+    "rate_limit_per_host": 10,
+    "max_memory_mb": 4096,
+    "respect_robots_txt": true,
+    "default_mode": "passive"
+  }
+}
