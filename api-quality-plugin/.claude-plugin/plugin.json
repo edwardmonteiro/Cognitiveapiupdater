@@ -1,0 +1,120 @@
+{
+  "name": "api-quality",
+  "version": "1.0.0",
+  "description": "API Quality & Governance Toolkit - Audits API specifications for quality, enforces organizational standards, and generates improvement roadmaps.",
+  "author": "Itau Corporate Banking",
+  "license": "Apache-2.0",
+  "commands": [
+    {
+      "name": "audit-api",
+      "description": "Audit API specifications for quality and compliance",
+      "file": "../commands/audit-api.md",
+      "arguments": [
+        {
+          "name": "--spec",
+          "description": "Path to OpenAPI/WSDL spec file",
+          "required": false
+        },
+        {
+          "name": "--inventory",
+          "description": "Path to api_inventory.json for bulk audit",
+          "required": false
+        },
+        {
+          "name": "--policy",
+          "description": "Path to governance policy YAML file",
+          "required": false
+        },
+        {
+          "name": "--rules",
+          "description": "Comma-separated rules to enable (default: all)",
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "--severity",
+          "description": "Minimum severity to report: error, warning, info",
+          "required": false,
+          "default": "warning"
+        },
+        {
+          "name": "--output",
+          "description": "Output directory for results",
+          "required": false,
+          "default": "./output"
+        }
+      ]
+    },
+    {
+      "name": "governance-report",
+      "description": "Generate governance compliance report for API estate",
+      "file": "../commands/governance-report.md",
+      "arguments": [
+        {
+          "name": "--inventory",
+          "description": "Path to api_inventory.json",
+          "required": true
+        },
+        {
+          "name": "--policy",
+          "description": "Path to governance policy YAML file",
+          "required": false
+        },
+        {
+          "name": "--audit-results",
+          "description": "Path to existing audit_results.json",
+          "required": false
+        },
+        {
+          "name": "--output",
+          "description": "Output directory",
+          "required": false,
+          "default": "./output"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "openapi-linter",
+      "description": "Validates OpenAPI specs against configurable rulesets",
+      "directory": "../skills/openapi-linter"
+    },
+    {
+      "name": "naming-conventions",
+      "description": "Enforces consistent naming for paths, parameters, and schemas",
+      "directory": "../skills/naming-conventions"
+    },
+    {
+      "name": "security-checker",
+      "description": "Detects security issues: missing auth, PII exposure, insecure schemes",
+      "directory": "../skills/security-checker"
+    },
+    {
+      "name": "versioning-analyzer",
+      "description": "Analyzes API versioning strategy and consistency",
+      "directory": "../skills/versioning-analyzer"
+    },
+    {
+      "name": "deprecation-tracker",
+      "description": "Finds deprecated endpoints and tracks usage",
+      "directory": "../skills/deprecation-tracker"
+    },
+    {
+      "name": "breaking-change-detector",
+      "description": "Compares spec versions and detects breaking changes",
+      "directory": "../skills/breaking-change-detector"
+    }
+  ],
+  "scripts": {
+    "spec_auditor": "scripts/spec_auditor.py",
+    "governance_scorer": "scripts/governance_scorer.py",
+    "remediation_generator": "scripts/remediation_generator.py"
+  },
+  "settings": {
+    "default_severity": "warning",
+    "max_issues_per_api": 500,
+    "enable_autofix": false,
+    "policy_version": "1.0"
+  }
+}

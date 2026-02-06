@@ -1,0 +1,8 @@
+# API Catalog MCP Server - Dependencies
+
+# MCP SDK (Model Context Protocol)
+mcp>=0.9.0
+
+# Optional: for async HTTP health checks
+# aiohttp>=3.9.0
+# httpx>=0.25.0

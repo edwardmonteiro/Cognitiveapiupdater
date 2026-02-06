@@ -1,0 +1,89 @@
+{
+  "name": "api-catalog",
+  "version": "1.0.0",
+  "description": "MCP server providing access to API catalog for Claude and other AI tools",
+
+  "server": {
+    "command": "python",
+    "args": ["server/api_catalog_server.py", "--inventory", "api_inventory.json"],
+    "env": {}
+  },
+
+  "tools": [
+    {
+      "name": "search_apis",
+      "description": "Search the API catalog with filters",
+      "parameters": ["query", "type", "status", "owner", "criticality", "limit"]
+    },
+    {
+      "name": "get_api_details",
+      "description": "Get full details for a specific API",
+      "parameters": ["api_id"]
+    },
+    {
+      "name": "list_by_owner",
+      "description": "List all APIs owned by a squad",
+      "parameters": ["owner"]
+    },
+    {
+      "name": "get_stats",
+      "description": "Get catalog summary statistics",
+      "parameters": []
+    },
+    {
+      "name": "check_health",
+      "description": "Check API health status",
+      "parameters": ["api_id"]
+    },
+    {
+      "name": "find_undocumented",
+      "description": "List APIs missing documentation",
+      "parameters": ["limit"]
+    },
+    {
+      "name": "find_orphaned",
+      "description": "List APIs without owners",
+      "parameters": ["limit"]
+    }
+  ],
+
+  "resources": [
+    {
+      "uri": "catalog://inventory",
+      "name": "API Inventory",
+      "description": "Complete API inventory JSON"
+    },
+    {
+      "uri": "catalog://stats",
+      "name": "Catalog Statistics",
+      "description": "Summary statistics"
+    },
+    {
+      "uri": "catalog://health",
+      "name": "Health Overview",
+      "description": "Health status of all APIs"
+    }
+  ],
+
+  "prompts": [
+    {
+      "name": "api_overview",
+      "description": "Generate an overview of a specific API",
+      "arguments": ["api_id"]
+    },
+    {
+      "name": "squad_report",
+      "description": "Generate a report of all APIs owned by a squad",
+      "arguments": ["squad_name"]
+    }
+  ],
+
+  "claude_code_settings": {
+    "mcpServers": {
+      "api-catalog": {
+        "command": "python",
+        "args": ["api-catalog-mcp-server/server/api_catalog_server.py", "--inventory", "api_inventory.json"]
+      }
+    }
+  }
+}

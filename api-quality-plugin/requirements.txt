@@ -1,0 +1,10 @@
+# API Quality Plugin - Dependencies
+
+# YAML parsing (for OpenAPI YAML specs)
+pyyaml>=6.0
+
+# JSON Schema validation (optional - for stricter validation)
+# jsonschema>=4.0
+
+# Rich console output (optional)
+# rich>=13.0.0
